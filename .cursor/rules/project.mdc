@@ -1,0 +1,18 @@
+---
+description: Project-level conventions for doef
+alwaysApply: true
+---
+
+# Doef Conventions
+
+- **Workspace root**: `/Users/jacobusbrink/Code/projects/doef`
+- **Stack**: React + TypeScript + Vite, SVG rendering, Web Audio API
+- **No backend**: all persistence is localStorage or file export/import
+- **Domain model** (`src/model/`): pure TypeScript, zero UI imports
+- **Components** (`src/components/`): React, import from hooks and model types only
+- **Audio** (`src/audio/`): Web Audio API, depends only on model
+- **Storage** (`src/storage/`): localStorage adapters, depends only on model
+- **Commits**: conventional format — `feat:`, `fix:`, `chore:`, `docs:`, `test:`, `refactor:`
+- **Tests**: Vitest + React Testing Library, co-located or in `__tests__/`
+- **Print**: every visual must work under `@media print` — no invisible-on-paper colours
+- **PRD**: `docs/product/PRD.md` is the source of truth for scope

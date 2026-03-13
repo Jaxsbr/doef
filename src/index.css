@@ -1,0 +1,340 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #fff;
+  color: #111;
+}
+
+/* ── App shell ────────────────────────────────────────────── */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+
+.sheet-name {
+  font-size: 1rem;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  min-width: 150px;
+  flex-shrink: 0;
+}
+
+.sheet-name:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* ── Controls bar ─────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px 0 6px;
+  border-right: 1px solid #ccc;
+}
+
+.control-group:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+/* ── Form controls ────────────────────────────────────────── */
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+input[type="number"] {
+  width: 58px;
+  padding: 6px 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+input[type="number"]:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: white;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+
+button {
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  font-size: 0.875rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.1s, opacity 0.1s;
+}
+
+button:hover:not(:disabled) {
+  background: #e8e8e8;
+}
+
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+button[aria-label="Play"],
+button[aria-label="Stop"] {
+  background: #2563eb;
+  color: white;
+  border-color: #1d4ed8;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+button[aria-label="Play"]:hover,
+button[aria-label="Stop"]:hover {
+  background: #1d4ed8;
+}
+
+button[aria-label="Metronome on"] {
+  background: #2563eb;
+  color: white;
+  border-color: #1d4ed8;
+  font-weight: 600;
+}
+
+button[aria-label="Metronome on"]:hover {
+  background: #1d4ed8;
+}
+
+/* ── Open sheet dropdown ──────────────────────────────────── */
+
+.open-sheet-wrapper {
+  position: relative;
+}
+
+.sheet-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 200px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  padding: 6px 0;
+}
+
+.sheet-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sheet-dropdown li button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  min-height: unset;
+}
+
+.sheet-dropdown li button:hover {
+  background: #f0f4ff;
+}
+
+.sheet-dropdown-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: none !important;
+  background: transparent !important;
+  font-size: 0.75rem;
+  color: #888;
+  min-height: unset !important;
+  padding: 2px 6px !important;
+  cursor: pointer;
+}
+
+.sheet-dropdown-close:hover {
+  color: #333;
+  background: transparent !important;
+}
+
+.sheet-dropdown-empty {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* ── Flash notification ───────────────────────────────────── */
+
+.flash-msg {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background: #1d4ed8;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 100;
+  animation: flash-in 0.15s ease;
+}
+
+@keyframes flash-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hint bar ─────────────────────────────────────────────── */
+
+.hint-bar {
+  font-size: 0.75rem;
+  color: #777;
+  background: #fafafa;
+  border-bottom: 1px solid #eee;
+  padding: 5px 16px;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.hint-bar kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 0.7rem;
+  font-family: inherit;
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  line-height: 1.4;
+}
+
+/* ── Main content ─────────────────────────────────────────── */
+
+main {
+  flex: 1;
+  padding: 20px 16px;
+  overflow-x: auto;
+}
+
+@media print {
+  /* Page setup */
+  body {
+    background: white;
+    color: black;
+  }
+
+  /* Hide all controls — print the grid only */
+  header,
+  .controls,
+  .hint-bar,
+  button {
+    display: none !important;
+  }
+
+  /* Remove screen padding/chrome from app shell */
+  .app {
+    padding: 0;
+    margin: 0;
+  }
+
+  main {
+    margin: 0;
+    padding: 0;
+  }
+
+  /* SVG staff notation — force black-on-white, no interactive colour */
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* Staff lines: solid black */
+  .staff-line {
+    stroke: #000 !important;
+  }
+
+  /* Noteheads: solid black */
+  .notehead-filled {
+    fill: #000 !important;
+  }
+
+  .notehead-x line {
+    stroke: #000 !important;
+  }
+
+  /* Beat lines: darker grey */
+  .beat-line {
+    stroke: #666 !important;
+  }
+
+  /* Clef label and bar numbers: black */
+  .clef-label,
+  .bar-number {
+    fill: #000 !important;
+  }
+}
