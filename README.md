@@ -39,3 +39,7 @@ See [AGENTS.md](./AGENTS.md) for the full directory map and layer rules.
 
 - [Product Requirements](./docs/product/PRD.md) — MVP scope and blue sky features
 - [Architecture Decisions](./docs/decisions/) — ADRs logged here
+
+<!-- build-loop -->
+---
+*Built with [build-loop](docs/plan/) — init pre-v4 | builds pre-v4*
