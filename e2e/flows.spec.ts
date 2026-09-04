@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 import path from 'path'
 
 const SHOT = (name: string) =>
-  path.join('docs/ux-audit', `${name}.png`)
+  path.join('test-results/flows', `${name}.png`)
 
 // Helper: click the first hit-zone for a given voice + cell index (first bar only).
 // force:true bypasses SVG hit-zone overlap between adjacent voices (e.g. crash over hh-closed).

@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
   testDir: './e2e',
-  outputDir: './docs/ux-audit/screenshots',
+  outputDir: './test-results/playwright',
   use: {
     baseURL: 'http://localhost:5173',
     screenshot: 'on',

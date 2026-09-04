@@ -1,45 +1,72 @@
 # Doef
 
-A browser-based drum notation tool for creating short percussion practice exercises.
+Doef is a focused, browser-based drum notation tool for writing, hearing, saving,
+sharing, and printing short percussion practice exercises. The name is Afrikaans
+onomatopoeia for a drum hit.
 
-**doef** (Afrikaans onomatopoeia for a drum hit) is built for drummers who drill exercises — paradiddles, groove patterns, fill combinations — and need a fast way to notate, hear, and print 4–10 bar passages.
+## Current capabilities
 
-## Quick start
+- Standard drum staff rendered as scalable SVG
+- Nine drum voices on a sixteenth-note grid with count-in labels
+- Five time signatures and sheets from 1 to 16 bars
+- Click-to-place hits and right-click R/L sticking notation
+- Synthesised Web Audio playback with BPM control, metronome, looping, and a visual playhead
+- Undo, redo, clear, and keyboard shortcuts
+- Automatic browser-local saving and a saved-sheet picker
+- `.doef` JSON download and upload
+- Ink-friendly browser printing
+
+Doef has no backend. Application data stays in the browser's `localStorage` unless
+the user exports a sheet.
+
+## Development
+
+Requirements: Node.js 20 or newer and npm.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173).
+The development server is available at <http://localhost:5173>.
 
-## Features (MVP)
+```bash
+npm run lint      # Static checks
+npm test          # Unit and component tests
+npm run test:e2e  # Browser flows; requires Playwright Chromium
+npm run build     # Production build
+```
 
-- Grid-based drum notation with 16th-note resolution
-- Configurable time signature and bar count
-- Click to place / remove beats
-- Playback with adjustable BPM (Web Audio API)
-- Save and name notation sheets (browser localStorage)
-- Open and edit saved sheets
-- Print-friendly layout
+Install the browser used by the end-to-end suite once with:
 
-## Tech
+```bash
+npx playwright install chromium
+```
 
-- React + TypeScript + Vite
-- SVG rendering
-- Web Audio API (no external audio deps)
-- localStorage persistence
-- Vitest + React Testing Library
+## Docker
 
-## Project structure
+The Docker image pins the browser, Node runtime, and npm dependencies used by the
+test environment.
 
-See [AGENTS.md](./AGENTS.md) for the full directory map and layer rules.
+```bash
+docker build -t doef .
+docker run --rm doef
+docker run --rm doef npm run lint
+docker run --rm doef npm run build
+docker run --rm doef npm run test:e2e
+```
 
-## Docs
+To run the development server from the container:
 
-- [Product Requirements](./docs/product/PRD.md) — MVP scope and blue sky features
-- [Architecture Decisions](./docs/decisions/) — ADRs logged here
+```bash
+docker run --rm -p 5173:5173 doef npm run dev -- --host 0.0.0.0
+```
 
-<!-- build-loop -->
----
-*Built with [build-loop](docs/plan/) — init pre-v4 | builds pre-v4*
+## Documentation
+
+- [Product overview](docs/README.md)
+- [Potential future work](docs/ROADMAP.md)
+
+## License
+
+[MIT](LICENSE)
